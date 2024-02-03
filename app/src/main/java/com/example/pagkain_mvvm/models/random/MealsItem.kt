@@ -1,6 +1,11 @@
 package com.example.pagkain_mvvm.models.random
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "mealInformation")
 data class MealsItem(
+    @PrimaryKey()
     val idMeal: String,
     val strMeal: String,
     val strDrinkAlternate: String?,
