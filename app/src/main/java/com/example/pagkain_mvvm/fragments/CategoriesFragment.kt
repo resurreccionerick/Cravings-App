@@ -70,7 +70,6 @@ class CategoriesFragment : Fragment() {
             intent.putExtra(HomeFragment.CATEGORY_NAME, categoryFood.strCategory)
 
             startActivity(intent)
-//            Toast.makeText(activity, "Test", Toast.LENGTH_LONG).show()
         }
     }
 }

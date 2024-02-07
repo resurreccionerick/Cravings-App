@@ -4,14 +4,17 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.pagkain_mvvm.database.MealDatabase
 import com.example.pagkain_mvvm.models.random.FoodListResponse
 import com.example.pagkain_mvvm.models.random.MealsItem
 import com.example.pagkain_mvvm.retrofit.RetrofitInstance
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MealViewModel() : ViewModel() {
+class MealViewModel(val mealDatabase: MealDatabase) : ViewModel() {
 
     private var mealDetailsLiveData = MutableLiveData<MealsItem>()
 
@@ -37,6 +40,18 @@ class MealViewModel() : ViewModel() {
 
     fun observerMealDetailsLiveData(): LiveData<MealsItem> {
         return mealDetailsLiveData
+    }
+
+    fun insertMeal(mealsItem: MealsItem) {
+        viewModelScope.launch {
+            mealDatabase.dao().upsertMeal(mealsItem)
+        }
+    }
+
+    fun deleteMeal(mealsItem: MealsItem) {
+        viewModelScope.launch {
+            mealDatabase.dao().delete(mealsItem)
+        }
     }
 
 }

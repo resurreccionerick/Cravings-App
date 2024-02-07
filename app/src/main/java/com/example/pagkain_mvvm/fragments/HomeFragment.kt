@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.pagkain_mvvm.MainActivity
 import com.example.pagkain_mvvm.activities.CategoryDetailsActivity
 import com.example.pagkain_mvvm.activities.FavoritesActivity
 import com.example.pagkain_mvvm.activities.adapter.CategoryAdapter
@@ -49,7 +50,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
+        homeViewModel = (activity as MainActivity).homeViewModel
         popularViewModel = ViewModelProviders.of(this)[PopularViewModel::class.java]
         categoryViewModel = ViewModelProviders.of(this)[CategoryViewModel::class.java]
 

@@ -11,7 +11,7 @@ import com.example.pagkain_mvvm.models.random.MealsItem
 @Dao
 interface MealDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMeal(meal: MealsItem)
+    suspend fun upsertMeal(meal: MealsItem)
 
     @Delete
     suspend fun delete(meal: MealsItem)
