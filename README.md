@@ -2,6 +2,9 @@
 
 Pagkain App is an application created to simplify the cooking process by offering detailed insights into selected meals, including instructional videos.
 
+## Download the apk here:
+https://drive.google.com/file/d/1Lg530-hjCRIcsePLK2mOGtcEgSuJLc4R/view?usp=sharing
+
 ## Usage
 
 To utilize Pagkain App, simply navigate through the app's interface, select your desired meal, and access comprehensive information including step-by-step instructions provided via video.
@@ -18,5 +21,7 @@ Pagkain App leverages a variety of libraries and technologies to enhance its fun
 - **Coroutines:** Executes background tasks to ensure smooth performance.
 - **View Binding:** Simplifies view inflation, improving code readability and maintenance.
 - **Glide:** Efficiently caches and loads images into ImageViews for an enhanced visual experience.
+
+
 
 
