@@ -25,6 +25,12 @@ class HomeViewModel(
 
     private var mealDetailsLiveData = MutableLiveData<MealsItem>()
 
+    private var searchLiveData = MutableLiveData<List<MealsItem>>()
+
+    init {
+        getRandomMeal() //even it recreate.. the livedata will stand still
+    }
+
     fun getRandomMeal() {
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<FoodListResponse> {
             override fun onResponse(
@@ -48,18 +54,6 @@ class HomeViewModel(
         })
     }
 
-    fun observeRandoMeal(): LiveData<MealsItem> { //the mutable live data will be observe by this function, because the mutable live data cant be changed.
-        return randomMealLiveData
-    }
-
-    fun observeFavoritesMealLiveData(): LiveData<List<MealsItem>> {
-        return favoritesMealLiveData
-    }
-
-    fun observerMealDetailsLiveData(): LiveData<MealsItem> {
-        return mealDetailsLiveData
-    }
-
     fun getMealDetails(id: String) {
         RetrofitInstance.api.getRandomMealInfo(id).enqueue(object : Callback<FoodListResponse> {
 
@@ -80,6 +74,22 @@ class HomeViewModel(
         })
     }
 
+
+    fun observeSearchLiveData(): LiveData<List<MealsItem>> = searchLiveData
+
+    fun observeRandoMealLiveData(): LiveData<MealsItem> { //the mutable live data will be observe by this function, because the mutable live data cant be changed.
+        return randomMealLiveData
+    }
+
+    fun observeFavoritesMealLiveData(): LiveData<List<MealsItem>> {
+        return favoritesMealLiveData
+    }
+
+    fun observerMealDetailsLiveData(): LiveData<MealsItem> {
+        return mealDetailsLiveData
+    }
+
+
     fun deleteMeal(mealsItem: MealsItem) {
         viewModelScope.launch {
             mealDatabase.dao().delete(mealsItem)
@@ -91,4 +101,23 @@ class HomeViewModel(
             mealDatabase.dao().upsertMeal(mealsItem)
         }
     }
+
+    fun searchMeal(searchQuery: String) = RetrofitInstance.api.searchItem(searchQuery).enqueue(
+        object : Callback<FoodListResponse> {
+            override fun onResponse(
+                call: Call<FoodListResponse>,
+                response: Response<FoodListResponse>
+            ) {
+                val mealList = response.body()?.meals
+                mealList?.let {//check if null
+                    searchLiveData.postValue(it)
+
+                }
+            }
+
+            override fun onFailure(call: Call<FoodListResponse>, t: Throwable) {
+                Log.d("Meal search error: ", t.message.toString())
+            }
+        }
+    )
 }

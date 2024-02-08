@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pagkain_mvvm.MainActivity
 import com.example.pagkain_mvvm.activities.FavoritesActivity
-import com.example.pagkain_mvvm.activities.adapter.FavoritesAdapter
+import com.example.pagkain_mvvm.activities.adapter.MealsAdapter
 import com.example.pagkain_mvvm.databinding.FragmentFavoritesBinding
 import com.example.pagkain_mvvm.models.random.MealsItem
 import com.example.pagkain_mvvm.viewmodel.HomeViewModel
@@ -22,14 +22,14 @@ class FavoritesFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var viewModel: HomeViewModel
-    private lateinit var favAdapter: FavoritesAdapter
+    private lateinit var favAdapter: MealsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewModel = (activity as MainActivity).homeViewModel
 
-        favAdapter = FavoritesAdapter()
+        favAdapter = MealsAdapter()
     }
 
     override fun onCreateView(
@@ -78,7 +78,7 @@ class FavoritesFragment : Fragment() {
     private fun observeFavorites() {
         viewModel.observeFavoritesMealLiveData().observe(viewLifecycleOwner, Observer { meals ->
             meals.forEach {
-                favAdapter.setFavorites(categoryList = meals as ArrayList<MealsItem>)
+                favAdapter.setFavorites(mealsList = meals as ArrayList<MealsItem>)
             }
         })
     }
