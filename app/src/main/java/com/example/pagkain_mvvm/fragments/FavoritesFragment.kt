@@ -1,21 +1,22 @@
 package com.example.pagkain_mvvm.fragments
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pagkain_mvvm.MainActivity
-import com.example.pagkain_mvvm.activities.CategoryDetailsActivity
 import com.example.pagkain_mvvm.activities.FavoritesActivity
 import com.example.pagkain_mvvm.activities.adapter.FavoritesAdapter
 import com.example.pagkain_mvvm.databinding.FragmentFavoritesBinding
 import com.example.pagkain_mvvm.models.random.MealsItem
 import com.example.pagkain_mvvm.viewmodel.HomeViewModel
-
+import com.google.android.material.snackbar.Snackbar
 
 class FavoritesFragment : Fragment() {
 
@@ -55,12 +56,21 @@ class FavoritesFragment : Fragment() {
             intent.putExtra(HomeFragment.MEAL_PIC, favFood.strMealThumb)
             startActivity(intent)
         }
+
+        favAdapter.onItemLongClick = { favFood ->
+            val position = favAdapter.favoriteList.indexOf(favFood)
+            val deletedMeal = favAdapter.favoriteList[position]
+
+            // Show a confirmation dialog before deleting the item
+            showDeleteConfirmationDialog(deletedMeal)
+
+            true
+        }
     }
 
     private fun prepareFavItemsRecyclerView() {
         binding.recFav.apply {
             layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.VERTICAL, false)
-
             adapter = favAdapter
         }
     }
@@ -73,4 +83,25 @@ class FavoritesFragment : Fragment() {
         })
     }
 
+    private fun showDeleteConfirmationDialog(deletedMeal: MealsItem) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Delete Favorite")
+            .setMessage("Are you sure you want to delete this favorite?")
+            .setPositiveButton("Delete") { dialogInterface: DialogInterface, _: Int ->
+                viewModel.deleteMeal(deletedMeal)
+                val position = favAdapter.favoriteList.indexOf(deletedMeal)
+                favAdapter.removeItem(position)
+                Snackbar.make(requireView(), "Favorite deleted", Snackbar.LENGTH_LONG).setAction(
+                    "Undo"
+                ) {
+                    viewModel.insertMeal(deletedMeal)
+                    favAdapter.notifyItemInserted(position)
+                }.show()
+                dialogInterface.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialogInterface: DialogInterface, _: Int ->
+                dialogInterface.dismiss()
+            }
+            .show()
+    }
 }

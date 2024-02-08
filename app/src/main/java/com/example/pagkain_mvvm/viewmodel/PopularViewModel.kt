@@ -38,5 +38,4 @@ class PopularViewModel() : ViewModel() {
     fun observerPopularMealsLiveData(): LiveData<List<PopularMeal>> {
         return popularMealLiveData
     }
-
 }

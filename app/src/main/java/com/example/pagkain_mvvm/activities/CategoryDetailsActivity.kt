@@ -6,15 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.example.pagkain_mvvm.R
 import com.example.pagkain_mvvm.activities.adapter.CategoryDetailsAdapter
 import com.example.pagkain_mvvm.databinding.ActivityCategoryDetailsBinding
 import com.example.pagkain_mvvm.fragments.HomeFragment
 import com.example.pagkain_mvvm.models.category.categoryfood.Meal
 import com.example.pagkain_mvvm.viewmodel.CategoryViewModel
-import com.example.pagkain_mvvm.viewmodel.MealViewModel
 
 class CategoryDetailsActivity : AppCompatActivity() {
 

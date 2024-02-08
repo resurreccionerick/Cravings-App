@@ -7,14 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.pagkain_mvvm.database.MealDatabase
 import com.example.pagkain_mvvm.databinding.ActivityFavoritesBinding
 import com.example.pagkain_mvvm.fragments.HomeFragment
 import com.example.pagkain_mvvm.models.random.MealsItem
-import com.example.pagkain_mvvm.viewmodel.MealViewModel
-import com.example.pagkain_mvvm.viewmodel.MealViewModelFactory
+import com.example.pagkain_mvvm.viewmodel.HomeViewModel
+import com.example.pagkain_mvvm.viewmodel.HomeViewModelFactory
 
 class FavoritesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoritesBinding
@@ -22,7 +21,7 @@ class FavoritesActivity : AppCompatActivity() {
     private lateinit var mealId: String
     private lateinit var ytLink: String
     private lateinit var mealPic: String
-    private lateinit var viewmodel: MealViewModel
+    private lateinit var viewmodel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +29,8 @@ class FavoritesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val mealDatabase = MealDatabase.getInstance(this)
-        val viewModelFactory = MealViewModelFactory(mealDatabase)
-        viewmodel = ViewModelProvider(this, viewModelFactory)[MealViewModel::class.java]
+        val viewModelFactory = HomeViewModelFactory(mealDatabase)
+        viewmodel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
         getMealInformation() //get from home fragment
 
