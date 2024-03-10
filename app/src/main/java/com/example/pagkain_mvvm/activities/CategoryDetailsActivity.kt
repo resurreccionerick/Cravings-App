@@ -74,7 +74,7 @@ class CategoryDetailsActivity : AppCompatActivity() {
             category?.let { // Check if category is not null
                 categoryDetailsAdapter.setCategory(categoryList = it as ArrayList<Meal>)
 
-                binding.tvSize.text = "Total Menu: " + category.size.toString()
+                binding.tvSize.text = "Total Dishes: " + category.size.toString()
             }
         }
     }

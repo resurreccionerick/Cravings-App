@@ -101,6 +101,7 @@ class FavoritesActivity : AppCompatActivity() {
         binding.tvAreaInfo.visibility = View.INVISIBLE
         binding.tvContent.visibility = View.INVISIBLE
         binding.tvCategoryInfo.visibility = View.INVISIBLE
+        binding.tvLink.visibility = View.INVISIBLE
     }
 
     private fun afterLoading() {

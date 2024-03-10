@@ -41,6 +41,8 @@ class CategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.layoutLoading.visibility = View.VISIBLE
+
         categoryViewModel.getCategory()
         observeCategoryMeal()
         onCategoryItemClicked()
@@ -60,6 +62,8 @@ class CategoriesFragment : Fragment() {
             viewLifecycleOwner
         ) { category ->
             categoryAdapter.setCategory(categoryList = category as ArrayList<CategoryList>)
+
+            binding.layoutLoading.visibility = View.GONE
         }
     }
 

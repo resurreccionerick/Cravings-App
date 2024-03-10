@@ -42,6 +42,7 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.layoutLoading.visibility = View.VISIBLE
 
         observeFavorites()
         onFavMealClicked()
@@ -77,9 +78,17 @@ class FavoritesFragment : Fragment() {
 
     private fun observeFavorites() {
         viewModel.observeFavoritesMealLiveData().observe(viewLifecycleOwner, Observer { meals ->
-            meals.forEach {
-                favAdapter.setFavorites(mealsList = meals as ArrayList<MealsItem>)
+            if (meals.isEmpty()) {
+                // Show a toast message indicating that the list is empty
+                binding.tvEmpty.visibility = View.VISIBLE
+            } else {
+                meals.forEach {
+                    favAdapter.setFavorites(mealsList = meals as ArrayList<MealsItem>)
+                }
+                binding.tvEmpty.visibility = View.GONE
             }
+            binding.layoutLoading.visibility = View.GONE
+
         })
     }
 

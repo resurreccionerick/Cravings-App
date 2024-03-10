@@ -48,6 +48,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.layoutLoading.visibility = View.VISIBLE
 
         prepareRecyclerView()
 
@@ -109,6 +110,7 @@ class SearchFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
             adapter = searchAdapter
 
+            binding.layoutLoading.visibility = View.GONE
         }
     }
 }

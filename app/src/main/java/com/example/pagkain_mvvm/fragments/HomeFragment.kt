@@ -73,6 +73,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.layoutLoading.visibility = View.VISIBLE
 
         preparePopularItemsRecyclerView()
 
@@ -178,6 +179,8 @@ class HomeFragment : Fragment() {
             viewLifecycleOwner
         ) { meal ->
             popularAdapter.setMeals(mealsList = meal as ArrayList<PopularMeal>)
+
+            binding.layoutLoading.visibility = View.GONE
         }
     }
 }

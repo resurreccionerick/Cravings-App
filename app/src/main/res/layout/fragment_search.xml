@@ -33,21 +33,6 @@
         app:layout_constraintStart_toEndOf="@id/ed_search"
         app:layout_constraintTop_toTopOf="@id/ed_search" />
 
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/searched_meal_card"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_marginStart="10dp"-->
-    <!--        android:layout_marginTop="50dp"-->
-    <!--        android:layout_marginEnd="10dp"-->
-    <!--        android:elevation="5dp"-->
-    <!--        android:visibility="invisible"-->
-    <!--        app:cardCornerRadius="10dp"-->
-    <!--        app:cardUseCompatPadding="true"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/ed_search">-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_search"
         android:layout_width="match_parent"
@@ -56,34 +41,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_search" />
 
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
+    <LinearLayout
+        android:id="@+id/layoutLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!--            <ImageView-->
-    <!--                android:id="@+id/img_searched_meal"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="170dp"-->
-    <!--                app:layout_constraintTop_toTopOf="parent"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                android:scaleType="centerCrop"/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data loading please wait..." />
 
-    <!--            <TextView-->
-    <!--                android:id="@+id/tv_searched_meal"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--                app:layout_constraintTop_toBottomOf="@id/img_searched_meal"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                android:textSize="20sp"-->
-    <!--                android:textStyle="bold"-->
-    <!--                android:textColor="@color/black"-->
-    <!--                android:gravity="center"-->
-    <!--                />-->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="100dp" />
+    </LinearLayout>
 
-    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-    <!--    </androidx.cardview.widget.CardView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
